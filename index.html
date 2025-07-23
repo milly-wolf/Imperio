@@ -148,17 +148,13 @@
     const loginMsg = document.getElementById('login-msg');
 
     loginForm.addEventListener('submit', e => {
-      e.preventDefault();
-      const email = document.getElementById('email').value.trim();
-      const senha = document.getElementById('senha').value.trim();
+  e.preventDefault();
+  const email = document.getElementById('email').value.trim();
+  const senha = document.getElementById('senha').value.trim();
 
-      if (email && senha.length >= 4) {
-        // Redireciona para manual.html após login
-        window.location.href = 'manual.html';
-      } else {
-        loginMsg.textContent = 'Email ou senha inválidos.';
-      }
-    });
-  </script>
-</body>
-</html>
+  if (email && senha.length >= 4) {
+    window.location.href = 'vip.html';
+  } else {
+    loginMsg.textContent = 'Email ou senha inválidos.';
+  }
+});
