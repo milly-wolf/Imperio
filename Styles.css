@@ -1,0 +1,46 @@
+body {
+  margin: 0;
+  background: black;
+  color: red;
+  font-family: monospace;
+  overflow: hidden;
+}
+
+canvas#matrix {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.login-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,0.8);
+  padding: 40px;
+  border: 1px solid red;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.login-container h1 {
+  margin-bottom: 20px;
+  color: red;
+}
+
+input, button {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  font-size: 1em;
+}
+
+button {
+  background-color: red;
+  color: black;
+  border: none;
+  cursor: pointer;
+}
