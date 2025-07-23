@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8" />
@@ -260,4 +261,97 @@
             <img src="https://i.postimg.cc/5QLcW1Sp/carta4.png" alt="Manipulação - Carta 4" />
             <p><strong>Manipulação:</strong> "Quem cala, consente... ou manipula."</p>
           </div>
-          <div class="carta">
+        </div>
+      </section>
+
+      <section id="rpg" class="secao">
+        <h2>RPG Psicológico</h2>
+        <p>Conteúdo do RPG vai aqui...</p>
+      </section>
+
+      <section id="avaliacoes" class="secao">
+        <h2>Avaliações</h2>
+        <p>Conteúdo das avaliações aqui...</p>
+      </section>
+
+      <section id="biblioteca" class="secao">
+        <h2>Biblioteca de Sombras</h2>
+        <p>Conteúdo da biblioteca aqui...</p>
+      </section>
+    </main>
+  </section>
+
+  <script>
+    // Função para mostrar uma seção e esconder as outras
+    function mostrarSecao(nome) {
+      const secoes = document.querySelectorAll('section.secao');
+      secoes.forEach(sec => {
+        sec.classList.remove('ativa');
+      });
+      const secaoMostrar = document.getElementById(nome);
+      if (secaoMostrar) {
+        secaoMostrar.classList.add('ativa');
+      }
+    }
+
+    // Controle simples do logout
+    document.getElementById('btnLogout').addEventListener('click', () => {
+      document.getElementById('vip-container').classList.remove('ativa');
+      document.getElementById('login-container').classList.add('ativa');
+    });
+
+    // Simulação simples do login só pra teste (sem backend)
+    document.getElementById('login-form').addEventListener('submit', e => {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const senha = document.getElementById('senha').value;
+      if(email && senha) {
+        document.getElementById('login-container').classList.remove('ativa');
+        document.getElementById('vip-container').classList.add('ativa');
+        mostrarSecao('manual'); // mostra manual ao entrar
+        document.getElementById('login-msg').textContent = '';
+      } else {
+        document.getElementById('login-msg').textContent = 'Preencha todos os campos.';
+      }
+    });
+
+    // Matrix effect
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    const letters = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズヅブプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポ0123456789@#$%^&*+-'.split('');
+    const fontSize = 16;
+    const columns = Math.floor(width / fontSize);
+    const drops = Array(columns).fill(1);
+
+    function draw() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, width, height);
+
+      ctx.fillStyle = '#ff0000';
+      ctx.font = fontSize + 'px monospace';
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+
+        drops[i]++;
+      }
+    }
+
+    setInterval(draw, 33);
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>
