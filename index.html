@@ -1,211 +1,101 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Sistema Hacker Vórtex VIP</title>
-<style>
-  /* Reset + fonte hacker */
-  * {
-    margin: 0; padding: 0; box-sizing: border-box;
-    font-family: monospace, monospace;
-  }
-  html, body {
-    height: 100%;
-    background: black;
-    color: #ff0000;
-    overflow: hidden;
-    position: relative;
-  }
-  canvas#matrix {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: 0;
-    background: black;
-    display: block;
-  }
-  .tela {
-    display: none;
-    padding: 20px;
-  }
-  .ativa {
-    display: block;
-  }
-  /* Containers do login e VIP */
-  #login-container, #vip-container {
-    position: relative;
-    z-index: 10;
-    max-width: 450px;
-    margin: 80px auto;
-    background: rgba(0,0,0,0.85);
-    border: 1px solid #8b0000;
-    border-radius: 8px;
-    padding: 25px;
-    box-shadow: 0 0 15px #8b0000;
-  }
-  /* Form login */
-  #login-container h1 {
-    margin-bottom: 20px;
-    color: #ff0000;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    text-align: center;
-  }
-  #login-container input {
-    width: 100%;
-    padding: 12px;
-    margin: 12px 0;
-    background: #111;
-    border: 1px solid #8b0000;
-    border-radius: 4px;
-    color: #ff0000;
-    font-size: 16px;
-  }
-  #login-container input:focus {
-    border-color: #ff0000;
-    outline: none;
-  }
-  #login-container button {
-    width: 100%;
-    padding: 14px;
-    background: #8b0000;
-    border: none;
-    border-radius: 4px;
-    color: white;
-    font-weight: bold;
-    letter-spacing: 2px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  #login-container button:hover {
-    background: #ff0000;
-  }
-  #login-msg {
-    color: #ff4444;
-    margin-top: 10px;
-    text-align: center;
-    min-height: 20px;
-  }
-  /* VIP header nav */
-  #vip-container header {
-    margin-bottom: 15px;
-  }
-  #vip-container header h1 {
-    text-align: center;
-    margin-bottom: 12px;
-    font-size: 1.5em;
-  }
-  #vip-container nav {
-    text-align: center;
-    margin-bottom: 25px;
-  }
-  #vip-container nav button {
-    margin: 0 5px 10px 5px;
-    background: transparent;
-    border: 1px solid #ff0000;
-    color: #ff0000;
-    padding: 8px 14px;
-    border-radius: 4px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s;
-  }
-  #vip-container nav button:hover {
-    background: #ff0000;
-    color: black;
-  }
-  #btnLogout {
-    background: #660000;
-    border-color: #660000;
-    margin-left: 20px;
-  }
-  #btnLogout:hover {
-    background: #ff0000;
-    color: black;
-  }
-  /* Sections VIP */
-  section.secao {
-    display: none;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  section.secao.ativa {
-    display: block;
-  }
-  /* Conteúdo básico */
-  section.secao h2 {
-    margin-bottom: 10px;
-    text-align: center;
-    letter-spacing: 2px;
-  }
-  section.secao p, section.secao ul {
-    color: #ff5555;
-    margin: 8px 20px 15px 20px;
-    line-height: 1.5em;
-  }
-  section.secao ul {
-    list-style: none;
-  }
-  section.secao ul li {
-    margin-bottom: 8px;
-  }
-  /* Cartas container */
-  .cartas-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-  }
-  .carta {
-    background: #330000;
-    border: 1px solid #8b0000;
-    padding: 12px;
-    border-radius: 6px;
-    width: 140px;
-    box-shadow: 0 0 8px #8b0000;
-    text-align: center;
-    color: #ff9999;
-  }
-  .carta img {
-    width: 100%;
-    border-radius: 4px;
-    margin-bottom: 8px;
-  }
-  /* Biblioteca Sombras */
-  #bibliotecaSombras {
-    margin-top: 15px;
-  }
-  .fichaSombra {
-    background: #220000;
-    border: 1px solid #8b0000;
-    padding: 12px;
-    border-radius: 6px;
-    margin-bottom: 10px;
-    box-shadow: 0 0 6px #8b0000;
-    color: #ff9999;
-  }
-  /* Botão criar sombra */
-  #btnCriarSombra {
-    background: #8b0000;
-    border: none;
-    padding: 10px 15px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  #btnCriarSombra:hover {
-    background: #ff0000;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login VIP Vórtex</title>
+  <style>
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: monospace, monospace;
+      color: #ffb800;
+      background-color: black;
+    }
+
+    body, html {
+      height: 100%;
+      background: black;
+    }
+
+    /* Login container */
+    #login-container {
+      position: relative;
+      max-width: 400px;
+      margin: 100px auto;
+      background: rgba(0, 0, 0, 0.85);
+      border: 1px solid #ffb800;
+      border-radius: 8px;
+      padding: 30px 25px;
+      box-shadow: 0 0 15px #ffb800;
+      text-align: center;
+    }
+
+    #login-container h1 {
+      font-weight: bold;
+      letter-spacing: 4px;
+      margin-bottom: 25px;
+      color: #ffb800;
+      text-transform: uppercase;
+    }
+
+    #login-container input {
+      width: 100%;
+      padding: 12px 15px;
+      margin-bottom: 20px;
+      background: #111;
+      border: 1px solid #ffb800;
+      border-radius: 5px;
+      color: #ffb800;
+      font-size: 16px;
+      transition: border-color 0.3s;
+    }
+
+    #login-container input:focus {
+      border-color: #ffd933;
+      outline: none;
+    }
+
+    #login-container button {
+      width: 100%;
+      padding: 14px;
+      background: #ffb800;
+      border: none;
+      border-radius: 5px;
+      color: black;
+      font-weight: bold;
+      letter-spacing: 3px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    #login-container button:hover {
+      background: #ffd933;
+    }
+
+    #login-msg {
+      margin-top: 15px;
+      color: #ff4444;
+      min-height: 20px;
+      font-weight: bold;
+    }
+
+    /* Canvas matrix ocupa toda a tela */
+    canvas#matrix {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+      background: black;
+      display: block;
+    }
+  </style>
 </head>
 <body>
-
   <canvas id="matrix"></canvas>
 
-  <!-- LOGIN -->
   <section id="login-container" class="tela ativa">
     <h1>ACESSO VIP</h1>
     <form id="login-form">
@@ -216,148 +106,59 @@
     <p id="login-msg"></p>
   </section>
 
-  <!-- ÁREA VIP -->
-  <section id="vip-container" class="tela">
-    <header>
-      <h1>Sistema Hacker Vórtex - Área VIP</h1>
-      <nav>
-        <button onclick="mostrarSecao('manual')">Manual Mental</button>
-        <button onclick="mostrarSecao('cartas')">Cartas Secretas</button>
-        <button onclick="mostrarSecao('rpg')">RPG Psicológico</button>
-        <button onclick="mostrarSecao('avaliacoes')">Avaliações</button>
-        <button onclick="mostrarSecao('biblioteca')">Biblioteca de Sombras</button>
-        <button id="btnLogout">Sair</button>
-      </nav>
-    </header>
+  <script>
+    // Matrix effect
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
 
-    <main>
-      <section id="manual" class="secao ativa">
-        <h2>Manual Mental</h2>
-        <p>Você está prestes a acessar seu próprio código-fonte mental. Aqui, não há distração, só confrontos. Cada conceito é um glitch na sua programação social.</p>
-        <h3>Capítulo 1: Atenção como moeda</h3>
-        <p>O que você consome te consome. Informação demais = paralisia. Atenção é foco + intenção. <em>Hack:</em> Reduz a exposição. Aumenta a direção.</p>
-        <h3>Capítulo 2: Reprogramando o piloto automático</h3>
-        <p>Você reage mais do que age. Os gatilhos mentais são loops ocultos. <em>Hack:</em> Observe antes de responder. Toda resposta é um script.</p>
-        <h3>Capítulo 3: A dor como mestre</h3>
-        <p>A dor mostra onde há bloqueio. Fugir dela é fortalecer ela. <em>Hack:</em> Encarar, escrever, transcender.</p>
-      </section>
+    let width, height;
+    function resize() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+    }
+    window.addEventListener('resize', resize);
+    resize();
 
-      <section id="cartas" class="secao">
-        <h2>Cartas Secretas - Estilo UNO</h2>
-        <div class="cartas-container">
-          <div class="carta">
-            <img src="https://i.postimg.cc/WD1PFBsb/carta1.png" alt="Manipulação - Carta 1" />
-            <p><strong>Manipulação:</strong> "Quem controla o jogo, domina a mente."</p>
-          </div>
-          <div class="carta">
-            <img src="https://i.postimg.cc/sBHCpT2P/carta2.png" alt="Amor & Carência - Carta 2" />
-            <p><strong>Amor & Carência:</strong> "Amar demais é perder a si mesmo."</p>
-          </div>
-          <div class="carta">
-            <img src="https://i.postimg.cc/MXQJQbJR/carta3.png" alt="Máscara Social - Carta 3" />
-            <p><strong>Máscara Social:</strong> "A verdadeira face está sempre mascarada."</p>
-          </div>
-          <div class="carta">
-            <img src="https://i.postimg.cc/5QLcW1Sp/carta4.png" alt="Manipulação - Carta 4" />
-            <p><strong>Manipulação:</strong> "Quem cala, consente... ou manipula."</p>
-          </div>
-        </div>
-      </section>
+    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()-_=+[]{}|;:,.<>?';
+    const fontSize = 16;
+    const columns = Math.floor(width / fontSize);
+    const drops = new Array(columns).fill(1);
 
-      <section id="rpg" class="secao">
-        <h2>RPG Psicológico</h2>
-        <p>Em desenvolvimento...</p>
-      </section>
+    function draw() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, width, height);
+      ctx.fillStyle = '#ffb800'; // dourado forte
+      ctx.font = fontSize + 'px monospace';
 
-      <section id="avaliacoes" class="secao">
-        <h2>Avaliações</h2>
-        <p>Em desenvolvimento...</p>
-      </section>
-
-      <section id="biblioteca" class="secao">
-        <h2>Biblioteca de Sombras</h2>
-        <div id="bibliotecaSombras">
-          <p>Em desenvolvimento...</p>
-        </div>
-        <button id="btnCriarSombra">Criar sua sombra aqui</button>
-      </section>
-    </main>
-  </section>
-
-<script>
-  // Matrix Effect
-  const canvas = document.getElementById('matrix');
-  const ctx = canvas.getContext('2d');
-
-  let width, height;
-  function resize() {
-    width = window.innerWidth;
-    height = window.innerHeight;
-    canvas.width = width;
-    canvas.height = height;
-  }
-  window.addEventListener('resize', resize);
-  resize();
-
-  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()-_=+[]{}|;:,.<>?';
-  const fontSize = 16;
-  const columns = Math.floor(width / fontSize);
-  const drops = new Array(columns).fill(1);
-
-  function draw() {
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-    ctx.fillRect(0, 0, width, height);
-    ctx.fillStyle = '#ff0000';
-    ctx.font = fontSize + 'px monospace';
-
-    for(let i = 0; i < drops.length; i++) {
-      const text = letters.charAt(Math.floor(Math.random() * letters.length));
-      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-      if(drops[i] * fontSize > height && Math.random() > 0.975) {
-        drops[i] = 0;
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
       }
-      drops[i]++;
     }
-  }
-  setInterval(draw, 50);
+    setInterval(draw, 50);
 
-  // Navegação entre seções VIP
-  function mostrarSecao(id) {
-    document.querySelectorAll('section.secao').forEach(sec => {
-      sec.classList.remove('ativa');
+    // Login fake com redirecionamento
+    const loginForm = document.getElementById('login-form');
+    const loginMsg = document.getElementById('login-msg');
+
+    loginForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const senha = document.getElementById('senha').value.trim();
+
+      if (email && senha.length >= 4) {
+        // Redireciona para manual.html após login
+        window.location.href = 'manual.html';
+      } else {
+        loginMsg.textContent = 'Email ou senha inválidos.';
+      }
     });
-    document.getElementById(id).classList.add('ativa');
-  }
-
-  // Login simples falso (só para mostrar a troca de telas)
-  const loginForm = document.getElementById('login-form');
-  const loginContainer = document.getElementById('login-container');
-  const vipContainer = document.getElementById('vip-container');
-  const loginMsg = document.getElementById('login-msg');
-  const btnLogout = document.getElementById('btnLogout');
-
-  loginForm.addEventListener('submit', e => {
-    e.preventDefault();
-    const email = document.getElementById('email').value.trim();
-    const senha = document.getElementById('senha').value.trim();
-
-    // Login fake: aceita qualquer email e senha com 4+ caracteres
-    if(email && senha.length >= 4){
-      loginContainer.classList.remove('ativa');
-      vipContainer.classList.add('ativa');
-      mostrarSecao('manual');
-      loginMsg.textContent = '';
-    } else {
-      loginMsg.textContent = 'Email ou senha inválidos.';
-    }
-  });
-
-  btnLogout.addEventListener('click', () => {
-    vipContainer.classList.remove('ativa');
-    loginContainer.classList.add('ativa');
-  });
-
-</script>
-
+  </script>
 </body>
 </html>
