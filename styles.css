@@ -1,0 +1,76 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: monospace, monospace;
+  color: #ffb800;
+  background-color: black;
+}
+
+body, html {
+  height: 100%;
+  background: black;
+}
+
+/* Login container */
+#login-container {
+  position: relative;
+  max-width: 400px;
+  margin: 100px auto;
+  background: rgba(0, 0, 0, 0.85);
+  border: 1px solid #ffb800;
+  border-radius: 8px;
+  padding: 30px 25px;
+  box-shadow: 0 0 15px #ffb800;
+  text-align: center;
+}
+
+#login-container h1 {
+  font-weight: bold;
+  letter-spacing: 4px;
+  margin-bottom: 25px;
+  color: #ffb800;
+  text-transform: uppercase;
+}
+
+#login-container input {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  background: #111;
+  border: 1px solid #ffb800;
+  border-radius: 5px;
+  color: #ffb800;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+#login-container input:focus {
+  border-color: #ffd933;
+  outline: none;
+}
+
+#login-container button {
+  width: 100%;
+  padding: 14px;
+  background: #ffb800;
+  border: none;
+  border-radius: 5px;
+  color: black;
+  font-weight: bold;
+  letter-spacing: 3px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#login-container button:hover {
+  background: #ffd933;
+}
+
+#login-msg {
+  margin-top: 15px;
+  color: #ff4444;
+  min-height: 20px;
+  font-weight: bold;
+}
