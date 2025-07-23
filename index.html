@@ -266,68 +266,39 @@
 
       <section id="rpg" class="secao">
         <h2>RPG Psicológico</h2>
-        <p>Conteúdo do RPG vai aqui...</p>
+        <p>Ainda em desenvolvimento... prepare-se para explorar seu lado oculto.</p>
       </section>
 
       <section id="avaliacoes" class="secao">
-        <h2>Avaliações</h2>
-        <p>Conteúdo das avaliações aqui...</p>
+        <h2>Avaliações Psicológicas</h2>
+        <p>Em breve, testes para entender seu funcionamento mental.</p>
       </section>
 
       <section id="biblioteca" class="secao">
         <h2>Biblioteca de Sombras</h2>
-        <p>Conteúdo da biblioteca aqui...</p>
+        <p>Aqui você vai encontrar personagens e suas sombras para explorar.</p>
+        <button id="btnCriarSombra">Crie sua sombra aqui</button>
+        <div id="bibliotecaSombras"></div>
       </section>
     </main>
   </section>
 
   <script>
-    // Função para mostrar uma seção e esconder as outras
-    function mostrarSecao(nome) {
-      const secoes = document.querySelectorAll('section.secao');
-      secoes.forEach(sec => {
-        sec.classList.remove('ativa');
-      });
-      const secaoMostrar = document.getElementById(nome);
-      if (secaoMostrar) {
-        secaoMostrar.classList.add('ativa');
-      }
-    }
-
-    // Controle simples do logout
-    document.getElementById('btnLogout').addEventListener('click', () => {
-      document.getElementById('vip-container').classList.remove('ativa');
-      document.getElementById('login-container').classList.add('ativa');
-    });
-
-    // Simulação simples do login só pra teste (sem backend)
-    document.getElementById('login-form').addEventListener('submit', e => {
-      e.preventDefault();
-      const email = document.getElementById('email').value;
-      const senha = document.getElementById('senha').value;
-      if(email && senha) {
-        document.getElementById('login-container').classList.remove('ativa');
-        document.getElementById('vip-container').classList.add('ativa');
-        mostrarSecao('manual'); // mostra manual ao entrar
-        document.getElementById('login-msg').textContent = '';
-      } else {
-        document.getElementById('login-msg').textContent = 'Preencha todos os campos.';
-      }
-    });
-
-    // Matrix effect
+    // Efeito Matrix vermelho
     const canvas = document.getElementById('matrix');
     const ctx = canvas.getContext('2d');
 
-    let width = canvas.width = window.innerWidth;
-    let height = canvas.height = window.innerHeight;
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
 
-    const letters = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズヅブプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポ0123456789@#$%^&*+-'.split('');
-    const fontSize = 16;
+    const letters = '0123456789ABCDEF'.split('');
+    const fontSize = 14;
     const columns = Math.floor(width / fontSize);
-    const drops = Array(columns).fill(1);
+    const drops = new Array(columns).fill(1);
 
-    function draw() {
+    function drawMatrix() {
       ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
       ctx.fillRect(0, 0, width, height);
 
@@ -341,17 +312,75 @@
         if (drops[i] * fontSize > height && Math.random() > 0.975) {
           drops[i] = 0;
         }
-
         drops[i]++;
       }
     }
 
-    setInterval(draw, 33);
+    setInterval(drawMatrix, 35);
 
+    // Gerenciar telas e navegação
+    const loginContainer = document.getElementById('login-container');
+    const vipContainer = document.getElementById('vip-container');
+    const loginForm = document.getElementById('login-form');
+    const loginMsg = document.getElementById('login-msg');
+    const btnLogout = document.getElementById('btnLogout');
+
+    const secoes = document.querySelectorAll('section.secao');
+
+    function mostrarSecao(id) {
+      secoes.forEach(secao => {
+        if (secao.id === id) {
+          secao.classList.add('ativa');
+        } else {
+          secao.classList.remove('ativa');
+        }
+      });
+    }
+
+    loginForm.addEventListener('submit', e => {
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const senha = document.getElementById('senha').value.trim();
+
+      // Só um exemplo básico: aceita qualquer login que não esteja vazio
+      if (email && senha) {
+        loginContainer.classList.remove('ativa');
+        vipContainer.classList.add('ativa');
+        mostrarSecao('manual');
+        loginMsg.textContent = '';
+      } else {
+        loginMsg.textContent = 'Email e senha são obrigatórios!';
+      }
+    });
+
+    btnLogout.addEventListener('click', () => {
+      vipContainer.classList.remove('ativa');
+      loginContainer.classList.add('ativa');
+      loginForm.reset();
+    });
+
+    // Botão criar sombra (exemplo simples)
+    const btnCriarSombra = document.getElementById('btnCriarSombra');
+    const bibliotecaSombras = document.getElementById('bibliotecaSombras');
+
+    btnCriarSombra.addEventListener('click', () => {
+      const sombra = prompt('Nome da sua sombra:');
+      if (sombra) {
+        const div = document.createElement('div');
+        div.classList.add('fichaSombra');
+        div.textContent = sombra;
+        bibliotecaSombras.appendChild(div);
+      }
+    });
+
+    // Ajusta canvas no resize
     window.addEventListener('resize', () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
     });
   </script>
+
 </body>
-</html>
+  </html>
