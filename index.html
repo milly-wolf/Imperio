@@ -1,7 +1,28 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  console.log("Script carregado e rodando");
+  <console.log("Script carregado e rodando");
+  const loginForm = document.getElementById('login-form');
+
+if (!loginForm) {
+  console.error("Formulário não encontrado");
+} else {
+  loginForm.addEventListener('submit', e => {
+    e.preventDefault();
+    console.log("Evento submit disparado");
+    const email = document.getElementById('email').value.trim();
+    const senha = document.getElementById('senha').value.trim();
+
+    if (email && senha.length >= 4) {
+      console.log("Login válido, redirecionando...");
+      window.location.href = 'vip.html';
+    } else {
+      console.log("Login inválido");
+      document.getElementById('login-msg').textContent = 'Email ou senha inválidos.';
+    }
+  });
+}
+    </console.log>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Login VIP Vórtex</title>
