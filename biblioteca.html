@@ -1,67 +1,115 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <title>Biblioteca de Sombras</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Criar Sua Sombra</title>
+  <link rel="stylesheet" href="styles.css">
   <style>
-    .personagem {
-      background-color: #111;
-      border: 1px solid #555;
-      border-radius: 10px;
-      padding: 15px;
-      margin-bottom: 15px;
+    body {
+      background-color: black;
+      color: gold;
+      font-family: monospace;
+      padding: 20px;
     }
-    .personagem h3 {
-      margin-top: 0;
-      color: #ffd700;
+
+    h1, h2 {
+      color: gold;
+      text-shadow: 0 0 5px #FFD700;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+
+    input, select, textarea, button {
+      background-color: #111;
+      color: gold;
+      border: 1px solid gold;
+      padding: 8px;
+      width: 100%;
+      margin-bottom: 10px;
+      font-family: monospace;
+    }
+
+    button:hover {
+      background-color: gold;
+      color: black;
+      cursor: pointer;
+    }
+
+    .resultado {
+      margin-top: 30px;
+      padding: 15px;
+      border: 1px solid gold;
+      background-color: #111;
+    }
+
+    .glitch {
+      animation: glitch 0.2s infinite;
+    }
+
+    @keyframes glitch {
+      0% { text-shadow: 1px 0 red, -1px 0 blue; }
+      50% { text-shadow: -1px 0 red, 1px 0 blue; }
+      100% { text-shadow: 1px 0 red, -1px 0 blue; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>📚 Biblioteca de Sombras</h1>
-    <p>Aqui estão arquétipos prontos... e também os que foram criados por jogadores como você. Sua sombra também pode estar aqui.</p>
+  <h1 class="glitch">CRIAÇÃO DE PERSONAGEM</h1>
 
-    <h2>🧩 Personagens Prontos:</h2>
-    <div class="personagem">
-      <h3>🧠 O Julgador</h3>
-      <p>Controla tudo, porque teme perder o próprio valor.</p>
-    </div>
-    <div class="personagem">
-      <h3>🔥 O Sedutor</h3>
-      <p>Conquista todos, mas não sabe o que é intimidade real.</p>
-    </div>
-    <div class="personagem">
-      <h3>💧 O Mártir</h3>
-      <p>Se doa para esconder a raiva reprimida.</p>
-    </div>
+  <form id="form-sombra">
+    <label for="nome">Nome da Sombra:</label>
+    <input type="text" id="nome" required>
 
-    <h2>💀 Sombras Criadas:</h2>
-    <div id="personagens-criados"></div>
+    <label for="arquétipo">Arquétipo:</label>
+    <select id="arquétipo" required>
+      <option value="">Selecione</option>
+      <option value="Julgador">Julgador</option>
+      <option value="Sedutor">Sedutor</option>
+      <option value="Mártir">Mártir</option>
+      <option value="Controlador">Controlador</option>
+      <option value="Fugitivo">Fugitivo</option>
+    </select>
 
-    <a href="rpg.html">← Voltar ao RPG</a>
-  </div>
+    <label for="ferida">Ferida Principal:</label>
+    <input type="text" id="ferida" required>
+
+    <label for="habilidade">Habilidade Sombria:</label>
+    <input type="text" id="habilidade" required>
+
+    <label for="medo">Medo Oculto:</label>
+    <input type="text" id="medo" required>
+
+    <button type="submit">Invocar Sombra</button>
+  </form>
+
+  <div class="resultado" id="resultado"></div>
 
   <script>
-    const container = document.getElementById('personagens-criados');
-    const sombras = JSON.parse(localStorage.getItem('sombras')) || [];
+    const form = document.getElementById('form-sombra');
+    const resultado = document.getElementById('resultado');
 
-    if (sombras.length === 0) {
-      container.innerHTML = "<p>Nenhuma sombra criada ainda.</p>";
-    } else {
-      sombras.forEach((sombra) => {
-        const div = document.createElement('div');
-        div.className = 'personagem';
-        div.innerHTML = `
-          <h3>🧬 ${sombra.nome}</h3>
-          <p><strong>Medo Principal:</strong> ${sombra.medo}</p>
-          <p><strong>Máscara:</strong> ${sombra.mascara}</p>
-          <p><strong>Armadilha Psicológica:</strong> ${sombra.armadilha}</p>
-        `;
-        container.appendChild(div);
-      });
-    }
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const nome = document.getElementById('nome').value;
+      const arquétipo = document.getElementById('arquétipo').value;
+      const ferida = document.getElementById('ferida').value;
+      const habilidade = document.getElementById('habilidade').value;
+      const medo = document.getElementById('medo').value;
+
+      resultado.innerHTML = `
+        <h2>Sombra Invocada:</h2>
+        <p><strong>Nome:</strong> ${nome}</p>
+        <p><strong>Arquétipo:</strong> ${arquétipo}</p>
+        <p><strong>Ferida Principal:</strong> ${ferida}</p>
+        <p><strong>Habilidade Sombria:</strong> ${habilidade}</p>
+        <p><strong>Medo Oculto:</strong> ${medo}</p>
+      `;
+    });
   </script>
 </body>
 </html>
