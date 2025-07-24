@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Biblioteca de Sombras</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .personagem {
+      background-color: #111;
+      border: 1px solid #555;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+    .personagem h3 {
+      margin-top: 0;
+      color: #ffd700;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📚 Biblioteca de Sombras</h1>
+    <p>Aqui estão arquétipos prontos... e também os que foram criados por jogadores como você. Sua sombra também pode estar aqui.</p>
+
+    <h2>🧩 Personagens Prontos:</h2>
+    <div class="personagem">
+      <h3>🧠 O Julgador</h3>
+      <p>Controla tudo, porque teme perder o próprio valor.</p>
+    </div>
+    <div class="personagem">
+      <h3>🔥 O Sedutor</h3>
+      <p>Conquista todos, mas não sabe o que é intimidade real.</p>
+    </div>
+    <div class="personagem">
+      <h3>💧 O Mártir</h3>
+      <p>Se doa para esconder a raiva reprimida.</p>
+    </div>
+
+    <h2>💀 Sombras Criadas:</h2>
+    <div id="personagens-criados"></div>
+
+    <a href="rpg.html">← Voltar ao RPG</a>
+  </div>
+
+  <script>
+    const container = document.getElementById('personagens-criados');
+    const sombras = JSON.parse(localStorage.getItem('sombras')) || [];
+
+    if (sombras.length === 0) {
+      container.innerHTML = "<p>Nenhuma sombra criada ainda.</p>";
+    } else {
+      sombras.forEach((sombra) => {
+        const div = document.createElement('div');
+        div.className = 'personagem';
+        div.innerHTML = `
+          <h3>🧬 ${sombra.nome}</h3>
+          <p><strong>Medo Principal:</strong> ${sombra.medo}</p>
+          <p><strong>Máscara:</strong> ${sombra.mascara}</p>
+          <p><strong>Armadilha Psicológica:</strong> ${sombra.armadilha}</p>
+        `;
+        container.appendChild(div);
+      });
+    }
+  </script>
+</body>
+</html>
